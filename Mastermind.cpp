@@ -30,8 +30,8 @@ struct CodeAndGuess {
     Code guess;
 };
 
-template<typename OutStream>
 // Prints the code to the stream.
+template<typename OutStream>
 void PrintCode(OutStream& out, Code code ) {
     std::unordered_map<Colors, std::string> color_to_string {
         {Colors::Red   , "Red"},
@@ -103,8 +103,6 @@ Code GetRandomCode() {
 // Play the game Mastermind.
 void PlayMatermind() {
     std::cout << "Welcome To Mastermind!";
-
-    
     const Code code = GetRandomCode();
     Code guess{};
     do {
