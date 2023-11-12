@@ -32,7 +32,7 @@ struct CodeAndGuess {
 
 // Prints the code to the stream.
 template<typename OutStream>
-void PrintCode(OutStream& out, Code code ) {
+void PrintCode(OutStream& out, const Code& code ) {
     std::unordered_map<Colors, std::string> color_to_string {
         {Colors::Red   , "Red"},
         {Colors::Orange, "Orange"},
@@ -48,7 +48,7 @@ void PrintCode(OutStream& out, Code code ) {
 
 // Returns the number of pegs that the guess has that are both
 // the right color and in the right position as the code.
-int RightColorRightPosition( CodeAndGuess code_and_guess) {
+int RightColorRightPosition( const CodeAndGuess& code_and_guess) {
     const auto& [code, guess] = code_and_guess;
     return std::transform_reduce(std::begin(guess), std::end(guess)
                                 , std::begin(code)
@@ -61,7 +61,7 @@ int RightColorRightPosition( CodeAndGuess code_and_guess) {
 namespace{ 
     // Returns a map from color to the number of times that color occurs in
     // the code.
-    std::unordered_map<Colors, int> GetColorIncidences( Code code ) {
+    std::unordered_map<Colors, int> GetColorIncidences( const Code& code ) {
         std::unordered_map<Colors, int> color_incidences;
         for( const auto color : code ) {
             color_incidences[color]++;
@@ -73,7 +73,7 @@ namespace{
 // Returns the number of pegs that the guess has that are in
 // the right color and but not in the right position as the code. 
 // This count does not include element that are RightColorRightPosition.
-int RightColorWrongPosition( CodeAndGuess code_and_guess) {
+int RightColorWrongPosition( const CodeAndGuess& code_and_guess) {
     const auto& [code, guess] = code_and_guess;
     std::unordered_map<Colors,int> code_color_incidences = GetColorIncidences(code);
     std::unordered_map<Colors,int> guess_color_incidences = GetColorIncidences(guess);
@@ -101,7 +101,7 @@ Code GetRandomCode() {
 }
 
 // Play the game Mastermind.
-void PlayMatermind() {
+void PlayMastermind() {
     std::cout << "Welcome To Mastermind!";
     const Code code = GetRandomCode();
     Code guess{};
